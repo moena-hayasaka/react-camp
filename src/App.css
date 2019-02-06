@@ -374,6 +374,12 @@ body {
 }
 
 .row4 {
+  margin-bottom: 15px;
   white-space: normal;
   line-height: 1.5;
+}
+
+.row5 a {
+  color: #6495ed;
+  text-decoration: none;
 }

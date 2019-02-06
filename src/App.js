@@ -13,6 +13,8 @@ class App extends Component {
       live: '', // 居住地
       job: '', // 職業
       hobby: '', // 趣味
+      like: '', // 好きなもの
+      url: '', // URL
       message: '', // 最終的に表示するメッセージ
       successClass: '' // display:block
     };
@@ -33,19 +35,33 @@ class App extends Component {
     });
   }
 
-    handleInputJob(event) {
-      const inputJob = event.target.value;
-      this.setState({
-        job: inputJob
-      });
-    }
+  handleInputJob(event) {
+    const inputJob = event.target.value;
+    this.setState({
+      job: inputJob
+    });
+  }
 
-    handleInputhobby(event) {
-      const inputHobby = event.target.value;
-      this.setState({
-        hobby: inputHobby
-      });
-    }
+  handleInputHobby(event) {
+    const inputHobby = event.target.value;
+    this.setState({
+      hobby: inputHobby
+    });
+  }
+
+  handleInputLike(event) {
+    const inputLike = event.target.value;
+    this.setState({
+      like: inputLike
+    });
+  }
+
+  handleInputUrl(event) {
+    const inputUrl = event.target.value;
+    this.setState({
+      url: inputUrl
+    });
+  }
 
   // SENDボタンクリック時
   send() {
@@ -63,16 +79,17 @@ class App extends Component {
     // let { yourName } = this.state;
     let { job } = this.state;
     let { hobby } = this.state;
+    let { like } = this.state;
     const line = ' | ';
+    const deco = '..//*';
     let tmpMsg = '';
     if (radio === '1') {
-      tmpMsg = '@ ' + live + '\r\n' + job;
-      console.log(tmpMsg);
+      tmpMsg = '@ ' + live + ' job' + deco + job + ' hobby' + deco + hobby + ' love' + deco + like;
 
     } else if (radio === '2') {
-      tmpMsg = live + line + job + line;
+      tmpMsg = live + line + job + line + hobby + line + like + line;
     } else {
-      tmpMsg = live + 'で' + job + 'やってます。' + hobby + 'が趣味の方、気軽にフォローしてください！';
+      tmpMsg = live + 'で' + job + 'やってます。' + hobby + ',' + like + 'が好きです！！';
     }
 
     this.setState({
@@ -110,7 +127,7 @@ class App extends Component {
 
           </div>
           <div className="inputArea">
-            <p className="inputArea__txt">Fill In Blanks</p>
+            <p className="inputArea__txt">Fill In The Blanks</p>
             <div className="inputArea__item">
               <label>名前</label>
               <input type="text" value={this.state.yourName} onChange={this.handleInputName.bind(this)} />
@@ -125,7 +142,15 @@ class App extends Component {
             </div>
             <div className="inputArea__item">
               <label>趣味</label>
-              <input type="text" value={this.state.hobby} onChange={this.handleInputhobby.bind(this)}/>
+              <input type="text" value={this.state.hobby} onChange={this.handleInputHobby.bind(this)}/>
+            </div>
+            <div className="inputArea__item">
+              <label>好きなもの</label>
+              <input type="text" value={this.state.like} onChange={this.handleInputLike.bind(this)}/>
+            </div>
+            <div className="inputArea__item">
+              <label>URL</label>
+              <input type="text" value={this.state.url} onChange={this.handleInputUrl.bind(this)}/>
             </div>
           </div>
 
@@ -163,6 +188,7 @@ class App extends Component {
                 <pre className="row4">
                 {this.state.message}
                 </pre>
+                <div className="row5"><a href={this.state.url}>{this.state.url}</a></div>
               </div>
             </div>
           </div>
