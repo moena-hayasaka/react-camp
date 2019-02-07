@@ -18,7 +18,6 @@ class App extends Component {
       comment:'', // コメント
       url: '', // URL
       message: '', // 最終的に表示するメッセージ
-      successClass: '' // display:block
     };
   }
 
@@ -75,15 +74,27 @@ class App extends Component {
   // SENDボタンクリック時
   send() {
     // const { live } = this.state; // stateからvalueを取得
-    this.writeMsg();
-    let { yourName } = this.state;
-    if (yourName === '') { // 名前未入力のバリデーション
-      window.alert('名前を入力してください');
-    } else {
+    let states = this.writeMsg();
+    console.log(states);
+    // 未入力チェック
+    let nullCheck = true;
+    for (var item of states) {
+      if (item === '') {
+        window.alert('ひとこと、URL以外は入力してください！');
+        nullCheck = false;
+        break;
+      }
+    }
+
+    // 必要事項が埋まっていた場合、プロフィール表示
+    if (nullCheck) {
+      $('.outputArea').css('display', 'block');
+      var position = $('.outputArea__msg').offset().top;
+      $(window).scrollTop(position);
       $('.outputArea__msg').css('opacity', 1);
       setTimeout(() => {
         $('.outputArea__sns').css('opacity', 1);
-      }, 400);
+      }, 600);
     }
   }
 
@@ -94,29 +105,64 @@ class App extends Component {
     let { hobby } = this.state;
     let { like } = this.state;
     let { comment } = this.state;
+    let states = [live, job, hobby, like];
     const line = ' | ';
     let tmpMsg = '';
+    var random = Math.floor(Math.random() * 2);
+    console.log(random);
     if (radio === '1') {
-      this.setState({
-        image: './girl.jpg'
-      })
+      switch (random) {
+        case 0:
+          this.setState({
+            image: './girl.jpg'
+          });
+          break;
+        default:
+          this.setState({
+            image: './latte.png'
+          });
+          break;
+      }
+
       tmpMsg = '@ ' + live + ' /* job */' + job + ' /* hobby */' + hobby + ' /* love */' + like + ' ' + comment;
 
     } else if (radio === '2') {
-      this.setState({
-        image: './dog.jpg'
-      })
+      switch (random) {
+        case 0:
+          this.setState({
+            image: './dog.jpg'
+          });
+          break;
+
+        default:
+          this.setState({
+            image: './cat.jpg'
+          });
+          break;
+      }
       tmpMsg = live + line + job + line + hobby + line + like + line + comment + ' ' + comment;
     } else {
-      this.setState({
-        image: './pika.jpg'
-      })
+      switch (random) {
+        case 0:
+          this.setState({
+            image: './pika.jpg'
+          });
+          break;
+
+        default:
+          this.setState({
+            image: './purin.jpg'
+          });
+          break;
+      }
       tmpMsg = live + 'で' + job + 'やってます。' + hobby + ',' + like + 'が好きです！！ ' + comment;
     }
 
     this.setState({
       message: tmpMsg
     })
+
+    return states;
   }
 
   render() {
@@ -150,6 +196,7 @@ class App extends Component {
           </div>
           <div className="inputArea">
             <p className="inputArea__txt">Fill In The Blanks</p>
+            <p className="inputArea__txt__add">※「ひとこと」「URL」以外は入力必須※</p>
             <div className="inputArea__item">
               <label>名前</label>
               <input type="text" value={this.state.yourName} onChange={this.handleInputName.bind(this)} />
@@ -195,7 +242,6 @@ class App extends Component {
             </div>
             <div className="sns__content">
               <div className="sns__content__photo">
-                {/* <img src="./girl.JPG" alt=""/> */}
                 <img src={this.state.image} alt=""/>
 
               </div>
@@ -219,7 +265,28 @@ class App extends Component {
                 <div className="row5"><a href={this.state.url} target="_blank">{this.state.url}</a></div>
               </div>
             </div>
+            <div className="sns__postArea" >
+              <ul className="postArea__menu">
+                <li className="postArea__menu__item active">投稿</li>
+                <li className="postArea__menu__item">IGTV</li>
+                <li className="postArea__menu__item">保存済み</li>
+                <li className="postArea__menu__item">タグ付けされている人</li>
+              </ul>
+              <ul className="postArea__photos">
+                <li className="postArea__photos__item">
+                  <img src="./post1.png" alt=""/>
+                  </li>
+                <li className="postArea__photos__item">
+                  <img src="./post2.png" alt=""/>
+                </li>
+                <li className="postArea__photos__item">
+                  <img src="./post3.png" alt=""/>
+                </li>
+              </ul>
+            </div>
+
           </div>
+
         </div>
       </div>
     );
