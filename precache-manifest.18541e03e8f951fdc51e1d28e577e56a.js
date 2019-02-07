@@ -1,11 +1,11 @@
 self.__precacheManifest = [
   {
-    "revision": "1bd60dafa78a597cf027",
-    "url": "/react-camp/static/css/main.90e5e9e5.chunk.css"
+    "revision": "9e68ca1a8dbd98d14548",
+    "url": "/react-camp/static/css/main.8652cc06.chunk.css"
   },
   {
-    "revision": "1bd60dafa78a597cf027",
-    "url": "/react-camp/static/js/main.1bd60daf.chunk.js"
+    "revision": "9e68ca1a8dbd98d14548",
+    "url": "/react-camp/static/js/main.9e68ca1a.chunk.js"
   },
   {
     "revision": "8d0e66c87fefe411a085",
@@ -16,7 +16,7 @@ self.__precacheManifest = [
     "url": "/react-camp/static/js/runtime~main.f48096e4.js"
   },
   {
-    "revision": "18b4c32e99416bc5f8ab55efe19d5e02",
+    "revision": "5533ff6e46a907f83ef86ccf76e4728b",
     "url": "/react-camp/index.html"
   }
 ];
