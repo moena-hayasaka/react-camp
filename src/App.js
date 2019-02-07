@@ -73,7 +73,6 @@ class App extends Component {
 
   // SENDボタンクリック時
   send() {
-    // const { live } = this.state; // stateからvalueを取得
     let states = this.writeMsg();
     console.log(states);
     // 未入力チェック
@@ -114,7 +113,7 @@ class App extends Component {
       switch (random) {
         case 0:
           this.setState({
-            image: './girl.jpg'
+            image: './pro_girl.png'
           });
           break;
         default:
@@ -226,10 +225,6 @@ class App extends Component {
               <input type="text" value={this.state.url} onChange={this.handleInputUrl.bind(this)}/>
             </div>
           </div>
-
-
-          {/* 職業, 出身、居住域、趣味、すきなもの（複数）、URL*/}
-          {/* 未記入の場合のバリデーション、分岐 */}
           <button className="sendButton" onClick={this.send.bind(this)}>CREATE!</button>
         </div>
 
