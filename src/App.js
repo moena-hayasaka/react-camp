@@ -9,11 +9,13 @@ class App extends Component {
 
     this.state = {
       radio: '1', // ラジオボタン選択値
+      image: '', // プロフィール画像のurl
       yourName: '', // 名前
       live: '', // 居住地
       job: '', // 職業
       hobby: '', // 趣味
       like: '', // 好きなもの
+      comment:'', // コメント
       url: '', // URL
       message: '', // 最終的に表示するメッセージ
       successClass: '' // display:block
@@ -56,6 +58,13 @@ class App extends Component {
     });
   }
 
+  handleInputComment(event) {
+    const inputComment = event.target.value;
+    this.setState({
+      comment: inputComment
+    });
+  }
+
   handleInputUrl(event) {
     const inputUrl = event.target.value;
     this.setState({
@@ -67,29 +76,42 @@ class App extends Component {
   send() {
     // const { live } = this.state; // stateからvalueを取得
     this.writeMsg();
-    $('.outputArea__msg').css('opacity', 1);
-    setTimeout(() => {
-      $('.outputArea__sns').css('opacity', 1);
-    }, 400);
+    let { yourName } = this.state;
+    if (yourName === '') { // 名前未入力のバリデーション
+      window.alert('名前を入力してください');
+    } else {
+      $('.outputArea__msg').css('opacity', 1);
+      setTimeout(() => {
+        $('.outputArea__sns').css('opacity', 1);
+      }, 400);
+    }
   }
 
   writeMsg() {
     const { radio } = this.state; // stateからradioの値を取得
     let { live } = this.state; // stateからvalueを取得
-    // let { yourName } = this.state;
     let { job } = this.state;
     let { hobby } = this.state;
     let { like } = this.state;
+    let { comment } = this.state;
     const line = ' | ';
-    const deco = '..//*';
     let tmpMsg = '';
     if (radio === '1') {
-      tmpMsg = '@ ' + live + ' job' + deco + job + ' hobby' + deco + hobby + ' love' + deco + like;
+      this.setState({
+        image: './girl.jpg'
+      })
+      tmpMsg = '@ ' + live + ' /* job */' + job + ' /* hobby */' + hobby + ' /* love */' + like + ' ' + comment;
 
     } else if (radio === '2') {
-      tmpMsg = live + line + job + line + hobby + line + like + line;
+      this.setState({
+        image: './dog.jpg'
+      })
+      tmpMsg = live + line + job + line + hobby + line + like + line + comment + ' ' + comment;
     } else {
-      tmpMsg = live + 'で' + job + 'やってます。' + hobby + ',' + like + 'が好きです！！';
+      this.setState({
+        image: './pika.jpg'
+      })
+      tmpMsg = live + 'で' + job + 'やってます。' + hobby + ',' + like + 'が好きです！！ ' + comment;
     }
 
     this.setState({
@@ -149,6 +171,10 @@ class App extends Component {
               <input type="text" value={this.state.like} onChange={this.handleInputLike.bind(this)}/>
             </div>
             <div className="inputArea__item">
+              <label>ひとこと</label>
+              <input type="text" value={this.state.comment} onChange={this.handleInputComment.bind(this)}/>
+            </div>
+            <div className="inputArea__item">
               <label>URL</label>
               <input type="text" value={this.state.url} onChange={this.handleInputUrl.bind(this)}/>
             </div>
@@ -169,7 +195,9 @@ class App extends Component {
             </div>
             <div className="sns__content">
               <div className="sns__content__photo">
-                <img src="./girl.JPG" alt=""/>
+                {/* <img src="./girl.JPG" alt=""/> */}
+                <img src={this.state.image} alt=""/>
+
               </div>
               <div className="sns__content__text">
                 <div className="row1">
@@ -188,7 +216,7 @@ class App extends Component {
                 <pre className="row4">
                 {this.state.message}
                 </pre>
-                <div className="row5"><a href={this.state.url}>{this.state.url}</a></div>
+                <div className="row5"><a href={this.state.url} target="_blank">{this.state.url}</a></div>
               </div>
             </div>
           </div>
