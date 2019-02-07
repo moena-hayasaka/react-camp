@@ -242,7 +242,7 @@ class App extends Component {
               </div>
               <div className="sns__content__text">
                 <div className="row1">
-                  <p className="userId">nijibox</p>
+                  <p className="userId">account</p>
                   <p className="lookPro">プロフィールを編集</p>
                   <span className="wheel">
                     <img src="./wheel.png" alt=""/>
