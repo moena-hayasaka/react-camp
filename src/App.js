@@ -169,7 +169,7 @@ class App extends Component {
             </div>
             <div className="sns__content">
               <div className="sns__content__photo">
-                <img src="./girl.jpg" alt=""/>
+                <img src="./girl.JPG" alt=""/>
               </div>
               <div className="sns__content__text">
                 <div className="row1">
